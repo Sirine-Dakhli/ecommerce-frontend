@@ -1,54 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
 import { Produit } from '../../models/produit.model';
-import { Categorie } from '../../models/categorie.model';
 
 @Component({
   selector: 'app-visualiser-produits',
   templateUrl: './visualiser-produits.component.html',
-  styleUrls: ['./visualiser-produits.component.css']
+  styleUrls: ['./visualiser-produits.component.css'],
 })
 export class VisualiserProduitsComponent implements OnInit {
-  produits: Produit[] = [];
-  categories: Categorie[] = [];
-  isLoading = true;
-  error: string | null = null;
+  produits: Produit[] = []; // Propriété pour stocker les produits
+  isLoading = true; // Indicateur de chargement
+  error: string | null = null; // Propriété pour gérer les erreurs
 
   constructor(private produitService: ProduitService) {}
 
   ngOnInit(): void {
-    this.getProduits();
-    this.getCategories();
+    this.loadProduits(); // Charger les produits au démarrage
   }
 
-  getProduits(): void {
+  // Charger les produits
+  loadProduits(): void {
     this.produitService.getProduits().subscribe({
       next: (data: Produit[]) => {
         this.produits = data;
         this.isLoading = false;
-        this.error = null; // Réinitialise l'erreur si les données sont chargées avec succès
       },
       error: (err: any) => {
-        this.error = 'Erreur lors du chargement des produits.';
-        console.error('Erreur lors du chargement des produits:', err);
+        this.error = err.message;
         this.isLoading = false;
-      }
-    });
-  }
-
-  getCategories(): void {
-    this.produitService.getCategories().subscribe({
-      next: (data: Categorie[]) => {
-        this.categories = data;
       },
-      error: (err: any) => {
-        console.error('Erreur lors du chargement des catégories:', err);
-      }
     });
   }
 
+  // Ajouter un produit au panier (fonctionnalité à implémenter plus tard)
   ajouterAuPanier(produit: Produit): void {
-    alert(`Le produit "${produit.nom}" a été ajouté au panier.`);
-    console.log(`${produit.nom} ajouté au panier.`);
+    console.log(`Produit ajouté au panier :`, produit);
+    // Ajoutez ici la logique pour l'ajout au panier
   }
 }

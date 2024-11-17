@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { VisualiserProduitsComponent } from './pages/visualiser-produits/visualiser-produits.component';
 import { GestionCategorieComponent } from './pages/gestion-categorie/gestion-categorie.component';
 import { GestionProduitComponent } from './pages/gestion-produit/gestion-produit.component';
-
+import { RouterModule } from '@angular/router';
+import { CategorieService } from './services/categorie.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +21,10 @@ import { GestionProduitComponent } from './pages/gestion-produit/gestion-produit
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RouterModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CategorieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
