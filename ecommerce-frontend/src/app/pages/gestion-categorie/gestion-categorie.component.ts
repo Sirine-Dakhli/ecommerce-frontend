@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProduitService } from '../../services/produit.service';
+import { CategorieService } from '../../services/categorie.service';
 import { Categorie } from '../../models/categorie.model';
 
 @Component({
@@ -13,16 +13,16 @@ export class GestionCategorieComponent implements OnInit {
   isLoading = true;
   error: string | null = null;
 
-  constructor(private produitService: ProduitService) {}
+  constructor(private categorieService: CategorieService) {}
 
   ngOnInit(): void {
     this.loadCategories();
   }
 
-  // Charger la liste des catégories
+  // Charger toutes les catégories
   loadCategories(): void {
     this.isLoading = true;
-    this.produitService.getCategories().subscribe({
+    this.categorieService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
         this.isLoading = false;
@@ -38,14 +38,15 @@ export class GestionCategorieComponent implements OnInit {
   onSubmit(): void {
     if (this.categorie.id) {
       // Modifier la catégorie
-      this.produitService
-        .updateCategorie(this.categorie.id, this.categorie)
-        .subscribe(() => this.loadCategories());
+      this.categorieService.updateCategorie(this.categorie.id, this.categorie).subscribe(() => {
+        this.loadCategories();
+        this.resetForm();
+      });
     } else {
       // Ajouter une nouvelle catégorie
-      this.produitService.addCategorie(this.categorie).subscribe(() => {
+      this.categorieService.addCategorie(this.categorie).subscribe(() => {
         this.loadCategories();
-        this.categorie = { id: 0, nom: '', description: '' };
+        this.resetForm();
       });
     }
   }
@@ -57,6 +58,11 @@ export class GestionCategorieComponent implements OnInit {
 
   // Supprimer une catégorie
   deleteCategorie(id: number): void {
-    this.produitService.deleteCategorie(id).subscribe(() => this.loadCategories());
+    this.categorieService.deleteCategorie(id).subscribe(() => this.loadCategories());
+  }
+
+  // Réinitialiser le formulaire
+  resetForm(): void {
+    this.categorie = { id: 0, nom: '', description: '' };
   }
 }

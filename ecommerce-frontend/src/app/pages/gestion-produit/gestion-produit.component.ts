@@ -1,72 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
+import { CategorieService } from '../../services/categorie.service';
 import { Produit } from '../../models/produit.model';
 import { Categorie } from '../../models/categorie.model';
 
 @Component({
   selector: 'app-gestion-produit',
   templateUrl: './gestion-produit.component.html',
-  styleUrls: ['./gestion-produit.component.css'],
+  styleUrls: ['./gestion-produit.component.css']
 })
 export class GestionProduitComponent implements OnInit {
   produits: Produit[] = [];
   categories: Categorie[] = [];
-  produit: Produit = new Produit();
-  isLoading = true;
-  error: string | null = null;
+  produit: Produit = { nom: '', description: '', prix: 0 };
+  selectedCategorieId: number | null = null;
+  isLoading = false;
 
-  constructor(private produitService: ProduitService) {}
+  constructor(
+    private produitService: ProduitService,
+    private categorieService: CategorieService
+  ) {}
 
   ngOnInit(): void {
-    this.getProduits();
-    this.getCategories();
+    this.fetchProduits();
+    this.fetchCategories();
   }
 
-  getProduits(): void {
-    this.produitService.getProduits().subscribe({
-      next: (data: Produit[]) => {
-        this.produits = data;
-        this.isLoading = false;
-      },
-      error: (err: any) => {
-        this.error = err.message;
-        this.isLoading = false;
-      },
+  fetchProduits(): void {
+    this.isLoading = true;
+    this.produitService.getProduits().subscribe((data) => {
+      this.produits = data;
+      this.isLoading = false;
     });
   }
 
-  getCategories(): void {
-    this.produitService.getCategories().subscribe({
-      next: (data: Categorie[]) => {
-        this.categories = data;
-      },
-      error: (err: any) => {
-        console.error('Erreur lors du chargement des catégories', err);
-      },
+  fetchCategories(): void {
+    this.categorieService.getCategories().subscribe((data) => {
+      this.categories = data;
     });
   }
 
-  saveProduit(): void {
-    if (this.produit.id === 0) {
-      this.produitService.addProduit(this.produit).subscribe(() => {
-        this.getProduits();
-        this.produit = new Produit();
-      });
+  onSubmit(): void {
+    if (this.produit.id) {
+      this.produitService
+        .updateProduit(this.produit.id, this.produit, this.selectedCategorieId!)
+        .subscribe(() => this.fetchProduits());
     } else {
-      this.produitService.updateProduit(this.produit.id, this.produit).subscribe(() => {
-        this.getProduits();
-        this.produit = new Produit();
-      });
+      this.produitService
+        .addProduit(this.produit, this.selectedCategorieId!)
+        .subscribe(() => this.fetchProduits());
+    }
+    this.resetForm();
+  }
+
+  editProduit(produit: Produit): void {
+    this.produit = { ...produit };
+    this.selectedCategorieId = produit.categorie?.id || null;
+  }
+
+  deleteProduit(id: number | undefined): void {
+    if (id) {
+      this.produitService.deleteProduit(id).subscribe(() => this.fetchProduits());
     }
   }
 
-  editProduit(prod: Produit): void {
-    this.produit = { ...prod }; // Copie les données du produit
-  }
-
-  deleteProduit(id: number): void {
-    this.produitService.deleteProduit(id).subscribe(() => {
-      this.getProduits();
-    });
+  resetForm(): void {
+    this.produit = { nom: '', description: '', prix: 0 };
+    this.selectedCategorieId = null;
   }
 }

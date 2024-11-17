@@ -1,62 +1,65 @@
-<div class="container">
-  <h2>Gestion des Catégories</h2>
-
-  <!-- Affichage des erreurs -->
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Gestion des Catégories</h2>
 
   <!-- Formulaire d'ajout/modification -->
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="nom">Nom de la catégorie :</label>
-      <input
-        type="text"
-        id="nom"
-        [(ngModel)]="categorie.nom"
-        name="nom"
-        placeholder="Nom de la catégorie"
-        class="form-control"
-        required
-      />
+  <form class="mb-4" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <label for="nom" class="col-sm-2 col-form-label">Nom</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="categorie.nom"
+          name="nom"
+          placeholder="Nom de la catégorie"
+          required
+        />
+      </div>
     </div>
-    <div class="form-group">
-      <label for="description">Description :</label>
-      <textarea
-        id="description"
-        [(ngModel)]="categorie.description"
-        name="description"
-        placeholder="Description"
-        class="form-control"
-      ></textarea>
+    <div class="row mb-3">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea
+          class="form-control"
+          id="description"
+          [(ngModel)]="categorie.description"
+          name="description"
+          placeholder="Description de la catégorie"
+        ></textarea>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">
-      {{ categorie.id ? 'Modifier' : 'Ajouter' }}
-    </button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-warning">Enregistrer</button>
+    </div>
   </form>
 
   <!-- Liste des catégories -->
-  <div *ngIf="isLoading" class="spinner-border" role="status">
-    <span class="sr-only">Chargement...</span>
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
   </div>
-  <table *ngIf="!isLoading && categories.length > 0" class="table table-bordered mt-4">
-    <thead>
+  <table *ngIf="!isLoading && categories.length > 0" class="table table-bordered table-hover">
+    <thead class="table-primary">
       <tr>
         <th>Nom</th>
         <th>Description</th>
-        <th>Actions</th>
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let cat of categories">
         <td>{{ cat.nom }}</td>
         <td>{{ cat.description }}</td>
-        <td>
-          <button class="btn btn-warning" (click)="editCategorie(cat)">Modifier</button>
-          <button class="btn btn-danger" (click)="deleteCategorie(cat.id)">Supprimer</button>
+        <td class="text-center">
+          <button class="btn btn-warning btn-sm me-2" (click)="editCategorie(cat)">Modifier</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteCategorie(cat.id)">Supprimer</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <div *ngIf="!isLoading && categories.length === 0" class="alert alert-info">
-    Aucune catégorie trouvée.
+  <div *ngIf="!isLoading && categories.length === 0" class="text-center">
+    <p class="text-muted">Aucune catégorie trouvée.</p>
   </div>
 </div>

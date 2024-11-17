@@ -1,5 +1,5 @@
 export class Categorie {
-  id: number;
+  id: number; // Assurez-vous que 'id' est de type 'number' et non 'number | undefined'
   nom: string;
   description: string;
 
@@ -9,3 +9,4 @@ export class Categorie {
     this.description = description;
   }
 }
+

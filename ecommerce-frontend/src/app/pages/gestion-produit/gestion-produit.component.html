@@ -1,36 +1,103 @@
-<div class="container">
-  <h2>Gestion des Produits</h2>
-  <form (ngSubmit)="saveProduit()">
-    <input type="text" [(ngModel)]="produit.nom" name="nom" placeholder="Nom" required />
-    <textarea [(ngModel)]="produit.description" name="description" placeholder="Description"></textarea>
-    <input type="number" [(ngModel)]="produit.prix" name="prix" placeholder="Prix" required />
-    <select [(ngModel)]="produit.id_categorie" name="id_categorie" required>
-      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nom }}</option>
-    </select>
-    <button type="submit">{{ produit.id ? 'Modifier' : 'Ajouter' }}</button>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Gestion des Produits</h2>
+
+  <!-- Formulaire d'ajout/modification -->
+  <form class="mb-4" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <label for="categorie" class="col-sm-2 col-form-label">Catégorie</label>
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          [(ngModel)]="selectedCategorieId"
+          name="categorie"
+          required
+        >
+          <option *ngFor="let categorie of categories" [value]="categorie.id">
+            {{ categorie.nom }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="nom" class="col-sm-2 col-form-label">Nom</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="produit.nom"
+          name="nom"
+          placeholder="Nom du produit"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="prix" class="col-sm-2 col-form-label">Prix</label>
+      <div class="col-sm-10">
+        <input
+          type="number"
+          class="form-control"
+          id="prix"
+          [(ngModel)]="produit.prix"
+          name="prix"
+          placeholder="Prix du produit"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea
+          class="form-control"
+          id="description"
+          [(ngModel)]="produit.description"
+          name="description"
+          placeholder="Description du produit"
+        ></textarea>
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-warning">Enregistrer</button>
+    </div>
   </form>
 
-  <table class="table">
-    <thead>
+  <!-- Liste des produits -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+  </div>
+  <table *ngIf="!isLoading && produits.length > 0" class="table table-bordered table-hover">
+    <thead class="table-primary">
       <tr>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Prix</th>
         <th>Catégorie</th>
-        <th>Actions</th>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prod of produits">
-        <td>{{ prod.nom }}</td>
-        <td>{{ prod.description }}</td>
-        <td>{{ prod.prix }}</td>
-        <td>{{ prod.categorie?.nom }}</td>
-        <td>
-          <button (click)="editProduit(prod)">Modifier</button>
-          <button (click)="deleteProduit(prod.id)">Supprimer</button>
+      <tr *ngFor="let produit of produits">
+        <td>{{ produit.categorie?.nom }}</td>
+        <td>{{ produit.nom }}</td>
+        <td>{{ produit.prix | currency }}</td>
+        <td>{{ produit.description }}</td>
+        <td class="text-center">
+          <button class="btn btn-warning btn-sm me-2" (click)="editProduit(produit)">
+            Modifier
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduit(produit.id)">
+            Supprimer
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+  <div *ngIf="!isLoading && produits.length === 0" class="text-center">
+    <p class="text-muted">Aucun produit trouvé.</p>
+  </div>
 </div>
+
