@@ -1,0 +1,67 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  display: flex;
+}
+
+.categories {
+  width: 200px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.categories h3 {
+  margin-bottom: 10px;
+}
+
+.categories ul {
+  list-style: none;
+  padding: 0;
+}
+
+.categories li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.categories li:hover {
+  text-decoration: underline;
+}
+
+.produits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.produit-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+}
+
+.produit-card .produit-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.produit-card .ajouter {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.produit-card .ajouter:hover {
+  background-color: #e0a800;
+}

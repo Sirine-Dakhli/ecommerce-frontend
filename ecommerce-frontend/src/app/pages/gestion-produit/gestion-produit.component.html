@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Gestion des Produits</h2>
+  <form (ngSubmit)="saveProduit()">
+    <input type="text" [(ngModel)]="produit.nom" name="nom" placeholder="Nom" required />
+    <textarea [(ngModel)]="produit.description" name="description" placeholder="Description"></textarea>
+    <input type="number" [(ngModel)]="produit.prix" name="prix" placeholder="Prix" required />
+    <select [(ngModel)]="produit.id_categorie" name="id_categorie" required>
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nom }}</option>
+    </select>
+    <button type="submit">{{ produit.id ? 'Modifier' : 'Ajouter' }}</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Catégorie</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of produits">
+        <td>{{ prod.nom }}</td>
+        <td>{{ prod.description }}</td>
+        <td>{{ prod.prix }}</td>
+        <td>{{ prod.categorie?.nom }}</td>
+        <td>
+          <button (click)="editProduit(prod)">Modifier</button>
+          <button (click)="deleteProduit(prod.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

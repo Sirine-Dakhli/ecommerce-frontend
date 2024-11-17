@@ -1,0 +1,33 @@
+<div class="container">
+  <!-- Contenu principal -->
+  <div class="main-content">
+    <!-- Catégories -->
+    <aside class="categories">
+      <h3>Catégories</h3>
+      <ul>
+        <li *ngFor="let categorie of categories">{{ categorie.nom }}</li>
+      </ul>
+    </aside>
+
+    <!-- Produits -->
+    <section class="produits">
+      <div *ngIf="isLoading" class="loading">Chargement des produits...</div>
+      <div *ngIf="!isLoading && produits.length === 0" class="no-products">
+        Aucun produit disponible.
+      </div>
+      <div *ngIf="!isLoading && produits.length > 0" class="produits-grid">
+        <div *ngFor="let produit of produits" class="produit-card">
+          <div class="produit-image">
+            <img [src]="produit.imageUrl" alt="{{ produit.nom }}" />
+          </div>
+          <h3>{{ produit.nom }}</h3>
+          <p>{{ produit.description }}</p>
+          <p><strong>Prix : {{ produit.prix | currency: 'EUR' }}</strong></p>
+          <button class="ajouter" (click)="ajouterAuPanier(produit)">
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
