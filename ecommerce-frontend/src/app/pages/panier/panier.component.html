@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Panier</h1>
+  <div *ngIf="isLoading">Chargement du panier...</div>
+  <div *ngIf="!isLoading && panierProduits.length === 0">Votre panier est vide.</div>
+  <table *ngIf="!isLoading && panierProduits.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of panierProduits">
+        <td>{{ produit.nom }}</td>
+        <td>{{ produit.prix | currency: 'EUR' }}</td>
+        <td>
+          <input type="number" [(ngModel)]="produit.quantite" (change)="modifierQuantite(produit.id, produit.quantite)" />
+        </td>
+        <td>{{ produit.total | currency: 'EUR' }}</td>
+        <td>
+          <button (click)="supprimerProduit(produit.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
