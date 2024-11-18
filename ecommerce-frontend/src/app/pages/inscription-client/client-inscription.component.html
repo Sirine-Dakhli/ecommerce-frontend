@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2>Inscription Client</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom :</label>
+      <input type="text" id="nom" class="form-control" [(ngModel)]="client.nom" name="nom" required />
+    </div>
+    <div class="mb-3">
+      <label for="prenom" class="form-label">Prénom :</label>
+      <input type="text" id="prenom" class="form-control" [(ngModel)]="client.prenom" name="prenom" required />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Téléphone :</label>
+      <input type="text" id="phone" class="form-control" [(ngModel)]="client.phone" name="phone" required />
+    </div>
+    <div class="mb-3">
+      <label for="date_naissance" class="form-label">Date de naissance :</label>
+      <input type="date" id="date_naissance" class="form-control" [(ngModel)]="client.date_naissance" name="date_naissance" required />
+    </div>
+    <div class="mb-3">
+      <label for="adresse_personnelle" class="form-label">Adresse Personnelle :</label>
+      <input
+        type="text"
+        id="adresse_personnelle"
+        class="form-control"
+        [(ngModel)]="client.adresses[0].adresse"
+        name="adresse_personnelle"
+        placeholder="Adresse"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="adresse_livraison" class="form-label">Adresse Livraison :</label>
+      <input
+        type="text"
+        id="adresse_livraison"
+        class="form-control"
+        [(ngModel)]="client.adresses[1].adresse"
+        name="adresse_livraison"
+        placeholder="Adresse"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email :</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="compte.email" name="email" required />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe :</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="compte.password" name="password" required />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+      {{ isLoading ? 'Chargement...' : "S'inscrire" }}
+    </button>
+  </form>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>
