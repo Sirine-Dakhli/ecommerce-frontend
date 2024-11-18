@@ -1,0 +1,142 @@
+
+.blue-background {
+  background-color: #6ba9db;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+
+.header {
+  background-color: #508bb7;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .logo h2 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.header .nav {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header .nav-link:hover {
+  text-decoration: underline;
+}
+
+.cart .btn {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+.categories {
+  background-color: #508bb7;
+  padding: 15px;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.categories h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.categories ul {
+  list-style: none;
+  padding: 0;
+}
+
+.categories li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.categories li:hover {
+  text-decoration: underline;
+}
+
+
+.produits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.produit-card {
+  background-color: #ffffff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+}
+
+.produit-card .produit-image img {
+  max-width: 100%;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.ajouter {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ajouter:hover {
+  background-color: #e0a800;
+}
+
+/* Messages */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.no-products,
+.error {
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #508bb7;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  z-index: 1000;
+}
