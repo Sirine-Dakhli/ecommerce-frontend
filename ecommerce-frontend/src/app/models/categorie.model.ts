@@ -1,7 +1,8 @@
+// src/app/models/categorie.model.ts
 export class Categorie {
-  id: number; // Assurez-vous que 'id' est de type 'number' et non 'number | undefined'
-  nom: string;
-  description: string;
+  id: number; // ID de la catégorie
+  nom: string; // Nom de la catégorie
+  description: string; // Description de la catégorie
 
   constructor(id: number = 0, nom: string = '', description: string = '') {
     this.id = id;
@@ -9,4 +10,3 @@ export class Categorie {
     this.description = description;
   }
 }
-
