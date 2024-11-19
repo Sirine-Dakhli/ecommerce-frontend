@@ -13,7 +13,7 @@
         </ul>
       </nav>
       <div class="cart">
-        <a href="#" class="btn btn-light">Panier</a>
+        <a class="btn btn-light">Panier ({{ quantitePanier }})</a>
       </div>
     </div>
   </header>
@@ -47,7 +47,7 @@
         </ul>
       </div>
 
-      <!-- Produits -->
+      <!-- Liste des produits -->
       <div class="produits-grid col-md-9">
         <div *ngFor="let produit of produitsFiltres" class="produit-card">
           <div class="produit-image">
@@ -56,21 +56,48 @@
           <h3>{{ produit.nom }}</h3>
           <p>{{ produit.description }}</p>
           <p>Prix : {{ produit.prix }} $</p>
-          <button class="ajouter" (click)="ajouterAuPanier(produit)">
-            Ajouter
-          </button>
+          <button class="ajouter" (click)="ajouterAuPanier(produit)">Ajouter</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Gestion des messages -->
-  <div *ngIf="isLoading" class="loading">Chargement des produits...</div>
-  <div *ngIf="!isLoading && produitsFiltres.length === 0" class="no-products">
-    Aucun produit disponible.
-  </div>
-  <div *ngIf="error" class="error">
-    Une erreur est survenue : {{ error }}
+    <!-- Panier -->
+    <div class="panier mt-5">
+      <h3>Mon Panier</h3>
+      <table class="table table-bordered" *ngIf="produitsPanier.length > 0; else panierVide">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of produitsPanier">
+            <td>{{ produit.nom }}</td>
+            <td>{{ produit.prix }} $</td>
+            <td>
+              <input
+                type="number"
+                [(ngModel)]="produit.quantite"
+                (change)="modifierQuantite(produit)"
+                min="1"
+              />
+            </td>
+            <td>{{ produit.prix * produit.quantite! }} $</td>
+            <td>
+              <button class="btn btn-danger" (click)="supprimerDuPanier(produit.id!)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #panierVide>
+        <p class="text-white">Votre panier est vide.</p>
+      </ng-template>
+    </div>
   </div>
 
   <footer class="footer">
