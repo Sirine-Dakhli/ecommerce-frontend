@@ -6,6 +6,7 @@
       <a href="#">Contacter nous</a>
       <a href="#">fr</a>
       <a href="#">en</a>
+      <a routerLink="/login" class="nav-link">Se connecter</a>
     </nav>
     <div class="cart">
       <a href="#" class="btn-cart">Panier</a>
@@ -47,12 +48,12 @@
     </form>
 
     <!-- Message de succès -->
-    <div *ngIf="successMessage" class="alert alert-success">
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
       {{ successMessage }}
     </div>
 
     <!-- Message d'erreur -->
-    <div *ngIf="errorMessage" class="alert alert-danger">
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
       {{ errorMessage }}
     </div>
   </div>

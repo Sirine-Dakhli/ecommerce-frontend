@@ -49,7 +49,7 @@ export class GestionProduitComponent implements OnInit {
     this.isLoading = true;
     this.produitService.getProduits().subscribe({
       next: (data) => {
-        console.log('Produits récupérés depuis l\'API :', data); 
+        console.log('Produits récupérés depuis l\'API :', data);
 
         this.produits = data.map((produit) => {
 

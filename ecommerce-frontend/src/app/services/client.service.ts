@@ -11,20 +11,14 @@ export class ClientService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Méthode pour connecter un utilisateur
+   * Connexion de l'utilisateur
    */
   login(payload: any): Observable<any> {
-    return this.http.post(`${this.apiInternauteUrl}/connecter`, {
-      compte: {
-        email: payload.email,
-        password: payload.password
-      },
-      panier: null
-    });
+    return this.http.post(`${this.apiInternauteUrl}/connecter`, payload);
   }
 
   /**
-   * Méthode pour inscrire un nouveau client
+   * Inscription d'un nouveau client
    */
   inscrireClient(payload: any): Observable<any> {
     return this.http.post(`${this.apiInternauteUrl}/inscription-client`, payload);
