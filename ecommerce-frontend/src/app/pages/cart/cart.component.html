@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Mon Panier</h2>
+  <h2 class="text-center">Mon Panier</h2>
 
   <table class="table table-bordered" *ngIf="produitsPanier.length > 0; else panierVide">
     <thead>
@@ -21,11 +21,15 @@
             [(ngModel)]="produit.quantite"
             (change)="modifierQuantite(produit)"
             min="1"
+            class="form-control"
+            style="max-width: 80px"
           />
         </td>
         <td>{{ produit.prix * produit.quantite! }} $</td>
         <td>
-          <button class="btn btn-danger" (click)="supprimerDuPanier(produit.id!)">Supprimer</button>
+          <button class="btn btn-danger btn-sm" (click)="supprimerDuPanier(produit.id!)">
+            Supprimer
+          </button>
         </td>
       </tr>
     </tbody>
@@ -33,6 +37,6 @@
 
   <!-- Message si le panier est vide -->
   <ng-template #panierVide>
-    <p class="text-center">Votre panier est vide.</p>
+    <p class="text-center text-warning">Votre panier est vide.</p>
   </ng-template>
 </div>

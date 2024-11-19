@@ -5,7 +5,28 @@ import { Produit } from '../models/produit.model';
   providedIn: 'root',
 })
 export class CartService {
-  produitsPanier: Produit[] = []; // Liste des produits ajoutés au panier
+  private produitsPanier: Produit[] = []; // Liste des produits dans le panier
+
+  // Récupérer tous les produits dans le panier
+  getCartData(): Produit[] {
+    return this.produitsPanier;
+  }
+
+  // Définir les produits du panier
+  setCartData(produits: Produit[]): void {
+    this.produitsPanier = produits
+      .filter((item) => item.id && item.nom && item.prix > 0) // Filtre les produits valides
+      .map((item) => ({
+        id: item.id,
+        nom: item.nom,
+        prix: item.prix,
+        description: item.description || 'Description non disponible',
+        quantite: item.quantite || 1,
+        categorie: item.categorie || null,
+      }));
+    console.log('Panier mis à jour:', this.produitsPanier);
+  }
+
 
   // Ajouter un produit au panier
   ajouterAuPanier(produit: Produit): void {
@@ -16,11 +37,6 @@ export class CartService {
     } else {
       this.produitsPanier.push({ ...produit, quantite: 1 });
     }
-  }
-
-  // Récupérer tous les produits du panier
-  obtenirProduitsPanier(): Produit[] {
-    return this.produitsPanier;
   }
 
   // Modifier la quantité d'un produit
@@ -37,7 +53,7 @@ export class CartService {
   }
 
   // Obtenir la quantité totale des produits dans le panier
-  obtenirQuantiteTotale(): number {
+  getCartQuantity(): number {
     return this.produitsPanier.reduce((total, produit) => total + (produit.quantite || 0), 0);
   }
 }

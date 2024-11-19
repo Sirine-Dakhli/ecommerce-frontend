@@ -1,25 +1,37 @@
 <div class="blue-background">
-  <header class="header">
-    <div class="container d-flex justify-content-between align-items-center">
+  <!-- Header -->
+  <div class="header">
+    <div class="container d-flex justify-content-between align-items-center py-3">
       <div class="logo">
         <h2>LOGO</h2>
       </div>
       <nav>
         <ul class="nav">
-          <li class="nav-item"><a href="#" class="nav-link">Accueil</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Contacter nous</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">fr</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">en</a></li>
+          <li class="nav-item">
+            <a routerLink="/" class="nav-link text-white">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/contact" class="nav-link text-white">Contact</a>
+          </li>
+          <li class="nav-item text-white">
+            <a *ngIf="!userName; else userLoggedIn" routerLink="/login" class="nav-link text-warning">
+              Se connecter
+            </a>
+            <ng-template #userLoggedIn>
+              Bonjour, <strong>{{ userName }}</strong>
+            </ng-template>
+          </li>
         </ul>
       </nav>
       <div class="cart">
         <a class="btn btn-light">Panier ({{ quantitePanier }})</a>
       </div>
     </div>
-  </header>
+  </div>
 
+  <!-- Contenu Principal -->
   <div class="container main-content mt-4">
-    <h2 class="text-center mb-4 text-white">Visualiser les Produits</h2>
+    <h2 class="text-center mb-4 text-white">Liste des Produits</h2>
 
     <!-- Barre de recherche -->
     <div class="search-bar mb-4">
@@ -32,39 +44,28 @@
       />
     </div>
 
+    <!-- Liste des produits -->
     <div class="row">
-      <!-- Catégories -->
-      <div class="categories col-md-3">
-        <h3>Catégories</h3>
-        <ul>
-          <li
-            *ngFor="let categorie of categories"
-            (click)="filtrerParCategorie(categorie.id)"
-          >
-            {{ categorie.nom }}
-          </li>
-          <li (click)="reinitialiserFiltrage()">Toutes les catégories</li>
-        </ul>
-      </div>
-
-      <!-- Liste des produits -->
-      <div class="produits-grid col-md-9">
-        <div *ngFor="let produit of produitsFiltres" class="produit-card">
-          <div class="produit-image">
-            <img src="assets/images/default-product.png" alt="Image Produit" />
+      <div *ngFor="let produit of produitsFiltres" class="col-md-4 mb-4">
+        <div class="card">
+          <img
+            src="assets/images/default-product.png"
+            alt="{{ produit.nom }}"
+            class="card-img-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ produit.nom }}</h5>
+            <p class="card-text">Prix : {{ produit.prix }} $</p>
+            <button class="btn btn-primary" (click)="ajouterAuPanier(produit)">Ajouter</button>
           </div>
-          <h3>{{ produit.nom }}</h3>
-          <p>{{ produit.description }}</p>
-          <p>Prix : {{ produit.prix }} $</p>
-          <button class="ajouter" (click)="ajouterAuPanier(produit)">Ajouter</button>
         </div>
       </div>
     </div>
 
     <!-- Panier -->
     <div class="panier mt-5">
-      <h3>Mon Panier</h3>
-      <table class="table table-bordered" *ngIf="produitsPanier.length > 0; else panierVide">
+      <h3 class="text-white">Mon Panier</h3>
+      <table class="table table-bordered bg-white" *ngIf="produitsPanier.length > 0; else panierVide">
         <thead>
           <tr>
             <th>Produit</th>
@@ -82,25 +83,31 @@
               <input
                 type="number"
                 [(ngModel)]="produit.quantite"
-                (change)="modifierQuantite(produit)"
+                (change)="ajouterAuPanier(produit)"
                 min="1"
+                class="form-control"
+                style="max-width: 80px"
               />
             </td>
             <td>{{ produit.prix * produit.quantite! }} $</td>
             <td>
-              <button class="btn btn-danger" (click)="supprimerDuPanier(produit.id!)">Supprimer</button>
+              <button class="btn btn-danger btn-sm" (click)="supprimerDuPanier(produit.id!)">
+                Supprimer
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
 
+      <!-- Message si le panier est vide -->
       <ng-template #panierVide>
-        <p class="text-white">Votre panier est vide.</p>
+        <p class="text-warning text-center">Votre panier est vide.</p>
       </ng-template>
     </div>
   </div>
 
-  <footer class="footer">
-    <p>Accueil – contacter nous – fr</p>
+  <!-- Footer -->
+  <footer class="footer text-center py-3 mt-4">
+    <p class="text-white">Accueil – Contact – fr</p>
   </footer>
 </div>

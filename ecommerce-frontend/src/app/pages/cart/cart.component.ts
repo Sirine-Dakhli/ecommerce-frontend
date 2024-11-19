@@ -13,10 +13,8 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.produitsPanier = this.cartService.obtenirProduitsPanier();
-    console.log('Produits récupérés dans le panier :', this.produitsPanier);
+    this.produitsPanier = this.cartService.getCartData(); // Récupérer les produits du panier
   }
-
 
   // Modifier la quantité d'un produit
   modifierQuantite(produit: Produit): void {
@@ -28,6 +26,6 @@ export class CartComponent implements OnInit {
   // Supprimer un produit du panier
   supprimerDuPanier(id: number): void {
     this.cartService.supprimerDuPanier(id);
-    this.produitsPanier = this.cartService.obtenirProduitsPanier(); // Mettre à jour les données locales
+    this.produitsPanier = this.cartService.getCartData(); // Mettre à jour la liste locale
   }
 }
