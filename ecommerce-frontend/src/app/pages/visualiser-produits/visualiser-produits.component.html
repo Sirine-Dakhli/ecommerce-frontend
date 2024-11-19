@@ -33,31 +33,65 @@
   <div class="container main-content mt-4">
     <h2 class="text-center mb-4 text-white">Liste des Produits</h2>
 
-    <!-- Barre de recherche -->
-    <div class="search-bar mb-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Rechercher un produit..."
-        [(ngModel)]="searchTerm"
-        (input)="filtrerProduitsLocaux()"
-      />
-    </div>
-
-    <!-- Liste des produits -->
     <div class="row">
-      <div *ngFor="let produit of produitsFiltres" class="col-md-4 mb-4">
-        <div class="card">
-          <img
-            src="assets/images/default-product.png"
-            alt="{{ produit.nom }}"
-            class="card-img-top"
+      <!-- Sidebar pour les catégories -->
+      <div class="col-md-3">
+        <h5 class="text-white">Catégories</h5>
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let categorie of categories"
+            (click)="filtrerParCategorie(categorie.id)"
+            style="cursor: pointer"
+          >
+            {{ categorie.nom }}
+          </li>
+          <li class="list-group-item text-warning" (click)="supprimerFiltre()" style="cursor: pointer">
+            Toutes les catégories
+          </li>
+        </ul>
+      </div>
+
+      <!-- Liste des produits par catégorie -->
+      <div class="col-md-9">
+        <!-- Barre de recherche -->
+        <div class="search-bar mb-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Rechercher un produit..."
+            [(ngModel)]="searchTerm"
+            (input)="filtrerProduitsLocaux()"
           />
-          <div class="card-body">
-            <h5 class="card-title">{{ produit.nom }}</h5>
-            <p class="card-text">Prix : {{ produit.prix }} $</p>
-            <button class="btn btn-primary" (click)="ajouterAuPanier(produit)">Ajouter</button>
+        </div>
+
+        <!-- Produits affichés par catégorie -->
+        <div *ngFor="let categorie of getCategorieKeys()">
+          <h4 class="text-white mt-3">{{ categorie }}</h4>
+          <div class="row">
+            <div
+              *ngFor="let produit of produitsFiltresParCategorie[categorie]"
+              class="col-md-4 mb-4"
+            >
+              <div class="card">
+                <img
+                  src="assets/images/default-product.png"
+                  alt="{{ produit.nom }}"
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ produit.nom }}</h5>
+                  <p class="card-text">Prix : {{ produit.prix }} $</p>
+                  <button class="btn btn-primary" (click)="ajouterAuPanier(produit)">Ajouter</button>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- Message si aucun produit n'est trouvé -->
+        <div *ngIf="produitsFiltres.length === 0" class="text-center mt-4">
+          <p class="text-warning">Aucun produit trouvé.</p>
         </div>
       </div>
     </div>
