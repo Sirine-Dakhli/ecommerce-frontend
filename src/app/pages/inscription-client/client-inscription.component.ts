@@ -24,8 +24,8 @@ export class ClientInscriptionComponent {
     password: '',
   };
 
-  confirmEmail: string = ''; // Nouveau champ pour confirmer l'email
-  isLoading = false; // Pour gérer l'état de chargement
+  confirmEmail: string = ''; // Champ pour confirmer l'email
+  isLoading = false; // Indicateur d'état de chargement
   successMessage: string | null = null; // Message de succès
   errorMessage: string | null = null; // Message d'erreur
 
@@ -65,14 +65,13 @@ export class ClientInscriptionComponent {
 
     // Appeler le service pour envoyer les données
     this.clientService.inscrireClient(payload).subscribe({
-      next: (response) => {
+      next: () => {
         this.successMessage = 'Inscription réussie !';
         this.resetForm();
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = "Une erreur s'est produite lors de l'inscription.";
-        console.error(err);
         this.isLoading = false;
       },
     });

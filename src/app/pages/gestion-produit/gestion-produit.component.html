@@ -1,11 +1,42 @@
-<div class="blue-background">
-  <div class="container mt-5">
-    <h2 class="text-center mb-4 text-white">Gestion des Produits</h2>
 
+
+<div class="blue-background py-5">
+  <div class="header">
+
+  <div class="container d-flex justify-content-between align-items-center py-3">
+    <div class="logo">
+      <img src="assets/logo.png" alt="ShopSafe Logo" class="logo-img" width="100" height="80" />
+    </div>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link text-white">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" class="nav-link text-white">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/inscription-client" class="nav-link text-white">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <ng-container *ngIf="!userName; else userLoggedIn">
+            <a routerLink="/login" class="nav-link text-warning">Se connecter</a>
+          </ng-container>
+          <ng-template #userLoggedIn>
+            <span class="nav-link text-success">Bienvenue, {{ userName }}</span>
+          </ng-template>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+  <div class="container">
+    <br><br>
+    <h2 class="text-center mb-4">Gestion des Produits</h2>
 
     <form class="product-form mb-4" (ngSubmit)="onSubmit()">
       <div class="row mb-3">
-        <label for="categorie" class="col-sm-2 col-form-label text-white">Catégorie :</label>
+        <label for="categorie" class="col-sm-2 col-form-label">Catégorie</label>
         <div class="col-sm-10">
           <select
             class="form-select"
@@ -22,7 +53,7 @@
       </div>
 
       <div class="row mb-3">
-        <label for="nom" class="col-sm-2 col-form-label text-white">Nom :</label>
+        <label for="nom" class="col-sm-2 col-form-label">Nom</label>
         <div class="col-sm-10">
           <input
             type="text"
@@ -37,7 +68,7 @@
       </div>
 
       <div class="row mb-3">
-        <label for="prix" class="col-sm-2 col-form-label text-white">Prix :</label>
+        <label for="prix" class="col-sm-2 col-form-label">Prix</label>
         <div class="col-sm-10">
           <input
             type="number"
@@ -52,7 +83,7 @@
       </div>
 
       <div class="row mb-3">
-        <label for="description" class="col-sm-2 col-form-label text-white">Description :</label>
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
           <textarea
             class="form-control"
@@ -65,13 +96,12 @@
       </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-warning">Enregistrer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
       </div>
     </form>
 
-    <!-- Liste des produits -->
-    <table *ngIf="!isLoading && produits.length > 0" class="table table-bordered table-hover styled-table">
-      <thead class="table-primary">
+    <table class="styled-table mt-5">
+      <thead>
         <tr>
           <th>Catégorie</th>
           <th>Nom</th>
@@ -87,14 +117,14 @@
           <td>{{ produit.prix | currency }}</td>
           <td>{{ produit.description }}</td>
           <td class="text-center">
-            <button class="btn-modifier" (click)="editProduit(produit)">Modifier</button>
-            <button class="btn-supprimer" (click)="deleteProduit(produit.id)">Supprimer</button>
+            <button class="btn btn-warning me-2" (click)="editProduit(produit)">Modifier</button>
+            <button class="btn btn-danger" (click)="deleteProduit(produit.id)">Supprimer</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div *ngIf="!isLoading && produits.length === 0" class="text-center">
+    <div *ngIf="!isLoading && produits.length === 0" class="text-center mt-4">
       <p class="text-muted">Aucun produit trouvé.</p>
     </div>
   </div>

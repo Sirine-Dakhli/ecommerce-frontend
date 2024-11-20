@@ -1,7 +1,41 @@
-<div class="blue-background">
-  <div class="container">
-    <h2 class="text-center">Gestion des Catégories</h2>
 
+
+<div class="blue-background py-5">
+  <div class="header">
+
+  <div class="container d-flex justify-content-between align-items-center py-3">
+    <div class="logo">
+      <img src="assets/logo.png" alt="ShopSafe Logo" class="logo-img" width="100" height="80" />
+    </div>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link text-white">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" class="nav-link text-white">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/inscription-client" class="nav-link text-white">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <ng-container *ngIf="!userName; else userLoggedIn">
+            <a routerLink="/login" class="nav-link text-warning">Se connecter</a>
+          </ng-container>
+          <ng-template #userLoggedIn>
+            <span class="nav-link text-success">Bienvenue, {{ userName }}</span>
+          </ng-template>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+  <div class="container">
+    <br><br>
+
+<div class="blue-background py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Gestion des Catégories</h2>
 
     <form class="category-form" (ngSubmit)="onSubmit()">
       <div class="row mb-3">
@@ -31,12 +65,11 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn">Enregistrer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
       </div>
     </form>
 
-    
-    <table class="styled-table">
+    <table class="styled-table mt-5">
       <thead>
         <tr>
           <th>Nom</th>
@@ -49,14 +82,14 @@
           <td>{{ cat.nom }}</td>
           <td>{{ cat.description }}</td>
           <td class="actions">
-            <button class="btn-modifier" (click)="editCategorie(cat)">Modifier</button>
-            <button class="btn-supprimer" (click)="deleteCategorie(cat.id)">Supprimer</button>
+            <button class="btn btn-warning me-2" (click)="editCategorie(cat)">Modifier</button>
+            <button class="btn btn-danger" (click)="deleteCategorie(cat.id)">Supprimer</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div *ngIf="!isLoading && categories.length === 0" class="text-center">
+    <div *ngIf="!isLoading && categories.length === 0" class="text-center mt-4">
       <p class="text-muted">Aucune catégorie trouvée.</p>
     </div>
   </div>
