@@ -23,4 +23,18 @@ export class ClientService {
   inscrireClient(payload: any): Observable<any> {
     return this.http.post(`${this.apiInternauteUrl}/inscription-client`, payload);
   }
+
+  /**
+   * Récupérer les informations d'un client par ID
+   */
+  getClient(id: string): Observable<any> {
+    return this.http.get(`${this.apiInternauteUrl}/${id}`);
+  }
+
+  /**
+   * Mettre à jour les informations d'un client
+   */
+  updateClient(id: string, payload: any): Observable<any> {
+    return this.http.put(`${this.apiInternauteUrl}/${id}`, payload);
+  }
 }

@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'admin/gestion-produit', component: GestionProduitComponent },
   { path: 'login', component: LoginComponent },
   { path: 'panier', component: CartComponent },
-  { path: 'inscription-client', component: ClientInscriptionComponent } 
+  { path: 'inscription-client', component: ClientInscriptionComponent },
+  { path: 'modifier-client/:id', component: ModifierClientComponent },
 ];
 
 @NgModule({
