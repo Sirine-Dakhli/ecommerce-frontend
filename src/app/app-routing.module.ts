@@ -22,6 +22,8 @@ const routes: Routes = [
   { path: 'panier', component: CartComponent },
   { path: 'inscription-client', component: ClientInscriptionComponent } ,
   { path: 'modifier-client/:id', component: ModifierClientComponent },
+  { path: 'modifier-client/:id', component: ModifierClientComponent },
+
 ];
 
 @NgModule({

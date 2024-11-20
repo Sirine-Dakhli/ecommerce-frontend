@@ -1,25 +1,62 @@
-.checkout-container {
-  max-width: 600px;
-  margin: 0 auto;
+/* Réutilisation des styles de l'inscription */
+.blue-background {
+  background-color: #6ba9db;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+.header, .footer {
+  background-color: #508bb7;
+  color: #ffffff;
+  padding: 10px 20px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Conteneur principal */
+.main-content {
   padding: 20px;
-  background-color: #f9f9f9;
+}
+
+/* Formulaire spécifique */
+.form {
+  background-color: #508bb7;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #333;
-}
-
-.form-group {
+.form h4 {
   margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.list-group-item {
-  display: flex;
-  justify-content: space-between;
+.form .form-control {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-button {
-  width: 100%;
+.form .btn {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+.form .btn:hover {
+  background-color: #e0a800;
 }

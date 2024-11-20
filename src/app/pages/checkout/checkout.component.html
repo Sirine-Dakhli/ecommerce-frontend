@@ -1,56 +1,83 @@
-<div class="checkout-container">
-  <h2 class="text-center">Confirmation de commande</h2>
-
-  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
-
-  <form (ngSubmit)="confirmerCommande()">
-    <h4>Informations client</h4>
-    <p><strong>Nom : </strong>{{ user?.nom }} {{ user?.prenom }}</p>
-    <p><strong>Email : </strong>{{ user?.compte?.email }}</p>
-
-    <h4>Informations de paiement</h4>
-    <div class="form-group">
-      <label for="numeroCarte">Numéro de carte</label>
-      <input
-        type="text"
-        id="numeroCarte"
-        class="form-control"
-        [(ngModel)]="numeroCarte"
-        name="commande.numero_carte"
-        required
-      />
+<div class="blue-background">
+  <header class="header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <img src="assets/logo.png" alt="ShopSafe Logo" class="logo-img" width="100" height="80"/>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a href="#" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contacter nous</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">fr</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">en</a></li>
+        </ul>
+      </nav>
+      <div class="cart">
+        <a href="#" class="btn btn-light">Panier</a>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="dateExp">Date d'expiration</label>
-      <input
-        type="date"
-        id="dateExp"
-        class="form-control"
-        [(ngModel)]="dateExp"
-        name="commande.date_exp"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="codeCC">Code de sécurité</label>
-      <input
-        type="text"
-        id="codeCC"
-        class="form-control"
-        [(ngModel)]="codeCC"
-        name="commande.cc"
-        required
-      />
-    </div>
+  </header>
 
-    <h4>Produits dans le panier</h4>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let produit of produitsPanier">
-        {{ produit.nom }} (x{{ produit.quantite }}) - {{ produit.prix }} $
-      </li>
-    </ul>
+  <div class="container main-content mt-4">
+    <h2 class="text-center mb-4 text-white">Confirmation de commande</h2>
 
-    <button type="submit" class="btn btn-primary mt-4">Envoyer ma commande</button>
-  </form>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+    <form (ngSubmit)="confirmerCommande()" class="form">
+      <h4>Informations client</h4>
+      <p><strong>Nom : </strong>{{ user?.nom }} {{ user?.prenom }}</p>
+      <p><strong>Email : </strong>{{ user?.compte?.email }}</p>
+
+      <h4>Informations de paiement</h4>
+      <div class="form-group">
+        <label for="numeroCarte">Numéro de carte</label>
+        <input
+          type="text"
+          id="numeroCarte"
+          class="form-control"
+          [(ngModel)]="numeroCarte"
+          name="commande.numero_carte"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="dateExp">Date d'expiration</label>
+        <input
+          type="date"
+          id="dateExp"
+          class="form-control"
+          [(ngModel)]="dateExp"
+          name="commande.date_exp"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="codeCC">Code de sécurité</label>
+        <input
+          type="text"
+          id="codeCC"
+          class="form-control"
+          [(ngModel)]="codeCC"
+          name="commande.cc"
+          required
+        />
+      </div>
+
+      <h4>Produits dans le panier</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let produit of produitsPanier">
+          {{ produit.nom }} (x{{ produit.quantite }}) - {{ produit.prix }} $
+        </li>
+      </ul>
+
+      <button type="submit" class="btn btn-warning mt-4 w-100">
+        Envoyer ma commande
+      </button>
+    </form>
+  </div>
+
+  <footer class="footer mt-5">
+    <p>Accueil – Contacter nous – fr</p>
+  </footer>
 </div>
