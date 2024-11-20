@@ -5,18 +5,20 @@ export class Produit {
   nom: string;
   description: string;
   prix: number;
-  categorie?: Categorie | null; // Permettre null pour cette propriété
-  id_categorie?: number; // ID de la catégorie pour l'API
+  categorie?: Categorie | null;
+  quantite?: number; // Nouvelle propriété pour la gestion du panier
 
   constructor(
     nom: string = '',
     description: string = '',
     prix: number = 0,
-    categorie?: Categorie | null
+    categorie?: Categorie | null,
+    quantite: number = 1
   ) {
     this.nom = nom;
     this.description = description;
     this.prix = prix;
-    this.categorie = categorie || null; // Initialisation par défaut à null
+    this.categorie = categorie || null;
+    this.quantite = quantite;
   }
 }

@@ -1,35 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VisualiserProduitsComponent } from './pages/visualiser-produits/visualiser-produits.component';
 import { GestionCategorieComponent } from './pages/gestion-categorie/gestion-categorie.component';
 import { GestionProduitComponent } from './pages/gestion-produit/gestion-produit.component';
-import { ClientInscriptionComponent } from './pages/inscription-client/client-inscription.component'; // Import du composant
-import { RouterModule } from '@angular/router';
-import { CategorieService } from './services/categorie.service';
-import { ConnexionComponent } from './pages/connexion/connexion.component'; // Import du composant de connexion
-
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
+import { UserService } from './services/user.service';
+import { CartComponent } from './pages/cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
     VisualiserProduitsComponent,
     GestionCategorieComponent,
     GestionProduitComponent,
-    ClientInscriptionComponent, // Déclaration du composant
-    ConnexionComponent // Ajout du composant Connexion
+    AdminDashboardComponent,
+    LoginComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule, // Ajout de FormsModule pour ngModel
+    HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    RouterModule,
-    HttpClientModule
   ],
-  providers: [CategorieService],
-  bootstrap: [AppComponent]
+  providers: [UserService], // Déclarez UserService ici
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

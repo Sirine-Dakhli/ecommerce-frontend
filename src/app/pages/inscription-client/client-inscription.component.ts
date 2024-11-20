@@ -24,22 +24,46 @@ export class ClientInscriptionComponent {
     password: '',
   };
 
-  isLoading = false;
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+  confirmEmail: string = ''; // Nouveau champ pour confirmer l'email
+  isLoading = false; // Pour gérer l'état de chargement
+  successMessage: string | null = null; // Message de succès
+  errorMessage: string | null = null; // Message d'erreur
 
   constructor(private clientService: ClientService) {}
 
+  /**
+   * Méthode appelée lors de la soumission du formulaire
+   */
   onSubmit(): void {
     this.isLoading = true;
     this.successMessage = null;
     this.errorMessage = null;
 
+    // Validation : vérifier que les courriels correspondent
+    if (this.compte.email !== this.confirmEmail) {
+      this.errorMessage = 'Les courriels ne correspondent pas.';
+      this.isLoading = false;
+      return;
+    }
+
+    // Validation des codes postaux (format canadien)
+    const postalCodeRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+    if (
+      !postalCodeRegex.test(this.client.adresses[0].codePostal) ||
+      !postalCodeRegex.test(this.client.adresses[1].codePostal)
+    ) {
+      this.errorMessage = 'Le code postal doit être au format A1A 1A1.';
+      this.isLoading = false;
+      return;
+    }
+
+    // Préparer le payload
     const payload = {
       compte: this.compte,
       client: this.client,
     };
 
+    // Appeler le service pour envoyer les données
     this.clientService.inscrireClient(payload).subscribe({
       next: (response) => {
         this.successMessage = 'Inscription réussie !';
@@ -54,6 +78,9 @@ export class ClientInscriptionComponent {
     });
   }
 
+  /**
+   * Réinitialise les champs du formulaire
+   */
   resetForm(): void {
     this.client = {
       nom: '',
@@ -70,5 +97,7 @@ export class ClientInscriptionComponent {
       email: '',
       password: '',
     };
+
+    this.confirmEmail = ''; // Réinitialiser le champ de confirmation d'email
   }
 }

@@ -1,0 +1,21 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn:disabled {
+    background-color: #cccccc;
+  }
+  

@@ -1,22 +1,100 @@
-.form-container {
-  max-width: 500px;
-  margin: 0 auto;
+/* Fond bleu pour toute la page */
+.blue-background {
+  background-color: #6ba9db;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* Style de l'en-tête */
+.header {
+  background-color: #508bb7;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .logo h2 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.header .nav {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header .nav-link:hover {
+  text-decoration: underline;
+}
+
+.cart .btn {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Conteneur principal */
+.main-content {
   padding: 20px;
+}
+
+/* Formulaire */
+.form {
+  background-color: #508bb7;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form h4 {
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.form .form-control {
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 10px;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.form .btn {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px 15px;
 }
 
-.btn {
-  display: block;
+.form .btn:hover {
+  background-color: #e0a800;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  position: relative;
+  bottom: 0;
   width: 100%;
-}
-
-.alert {
+  background-color: #508bb7;
+  color: #ffffff;
   text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
 }

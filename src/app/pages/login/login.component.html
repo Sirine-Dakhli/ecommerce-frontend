@@ -1,0 +1,64 @@
+<div class="container">
+  <header class="header">
+    <div class="logo">LOGO</div>
+    <nav class="nav">
+      <a href="#">Accueil</a>
+      <a href="#">Contacter nous</a>
+      <a href="#">fr</a>
+      <a href="#">en</a>
+      <a routerLink="/login" class="nav-link">Se connecter</a>
+    </nav>
+    <div class="cart">
+      <a href="#" class="btn-cart">Panier</a>
+    </div>
+  </header>
+
+  <div class="form-container">
+    <h2>Connexion</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="form">
+      <div class="form-group">
+        <label for="email" class="form-label">Courriel :</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Mot de passe :</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-yellow"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        {{ isLoading ? 'Chargement...' : 'Se connecter' }}
+      </button>
+    </form>
+
+    <!-- Message de succès -->
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Accueil – Contacter nous – fr</p>
+  </footer>
+</div>

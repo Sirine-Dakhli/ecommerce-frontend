@@ -4,8 +4,10 @@ import { VisualiserProduitsComponent } from './pages/visualiser-produits/visuali
 import { GestionCategorieComponent } from './pages/gestion-categorie/gestion-categorie.component';
 import { GestionProduitComponent } from './pages/gestion-produit/gestion-produit.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
 import { ClientInscriptionComponent } from './pages/inscription-client/client-inscription.component';
-import { ConnexionComponent } from './pages/connexion/connexion.component'; // Import du composant de connexion
+import { ModifierClientComponent } from './pages/modifier-client/modifier-client.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/produits', pathMatch: 'full' },
@@ -13,8 +15,9 @@ const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'admin/gestion-categorie', component: GestionCategorieComponent },
   { path: 'admin/gestion-produit', component: GestionProduitComponent },
-  { path: 'inscription-client', component: ClientInscriptionComponent },
-  { path: 'connexion', component: ConnexionComponent }, // Nouvelle route pour la connexion
+  { path: 'login', component: LoginComponent },
+  { path: 'panier', component: CartComponent },
+  { path: 'inscription-client', component: ClientInscriptionComponent } 
 ];
 
 @NgModule({
