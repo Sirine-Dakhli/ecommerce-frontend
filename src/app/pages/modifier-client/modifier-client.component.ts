@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Client, Adresse, Compte } from '../../models/client.model';
 import { ClientService } from '../../services/client.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ClientService } from '../../services/client.service';
   styleUrls: ['./modifier-client.component.css']
 })
 export class ModifierClientComponent implements OnInit {
-  client: any = {
+  client: Client = {
     nom: '',
     prenom: '',
     phone: '',
@@ -19,7 +20,7 @@ export class ModifierClientComponent implements OnInit {
     ]
   };
 
-  compte: any = {
+  compte: Compte = {
     email: '',
     password: ''
   };
@@ -61,7 +62,7 @@ export class ModifierClientComponent implements OnInit {
           email: response.compte?.email || '',
           password: '' // Ne pas charger le mot de passe pour des raisons de sécurité
         };
-
+  
         // Ajouter des valeurs par défaut si les adresses sont absentes ou incomplètes
         if (!this.client.adresses[0]) {
           this.client.adresses[0] = {
@@ -83,7 +84,7 @@ export class ModifierClientComponent implements OnInit {
             codePostal: ''
           };
         }
-
+  
         this.isLoading = false;
       },
       error: (err: any) => {

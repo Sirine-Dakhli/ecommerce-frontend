@@ -1,42 +1,50 @@
-<div class="container mt-5">
-  <h2 class="text-center">Mon Panier</h2>
+<div class="blue-background">
+  <div class="container main-content mt-4">
+    <h2 class="text-center mb-4 text-white">Mon Panier</h2>
+    <table class="table table-bordered bg-white" *ngIf="produitsPanier.length > 0; else panierVide">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Prix</th>
+          <th>Quantité</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of produitsPanier">
+          <td>{{ produit.nom }}</td>
+          <td>{{ produit.prix }} $</td>
+          <td>
+            <input
+              type="number"
+              [(ngModel)]="produit.quantite"
+              (change)="modifierQuantite(produit)"
+              min="1"
+              class="form-control"
+              style="max-width: 80px"
+            />
+          </td>
+          <td>{{ produit.prix * produit.quantite! }} $</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="supprimerDuPanier(produit.id!)">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <table class="table table-bordered" *ngIf="produitsPanier.length > 0; else panierVide">
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Prix</th>
-        <th>Quantité</th>
-        <th>Total</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let produit of produitsPanier">
-        <td>{{ produit.nom }}</td>
-        <td>{{ produit.prix }} $</td>
-        <td>
-          <input
-            type="number"
-            [(ngModel)]="produit.quantite"
-            (change)="modifierQuantite(produit)"
-            min="1"
-            class="form-control"
-            style="max-width: 80px"
-          />
-        </td>
-        <td>{{ produit.prix * produit.quantite! }} $</td>
-        <td>
-          <button class="btn btn-danger btn-sm" (click)="supprimerDuPanier(produit.id!)">
-            Supprimer
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Message si le panier est vide -->
+    <ng-template #panierVide>
+      <p class="text-warning text-center">Votre panier est vide.</p>
+    </ng-template>
 
-  <!-- Message si le panier est vide -->
-  <ng-template #panierVide>
-    <p class="text-center text-warning">Votre panier est vide.</p>
-  </ng-template>
+    <!-- Boutons pour continuer -->
+    <div class="mt-4 d-flex justify-content-between">
+      <button routerLink="/produits" class="btn btn-secondary">Continuer à magasiner</button>
+      <button class="btn btn-primary" routerLink="/checkout">Acheter</button>
+
+    </div>
+  </div>
 </div>

@@ -7,34 +7,42 @@ import { Observable } from 'rxjs';
 })
 export class ClientService {
   private apiInternauteUrl = 'http://localhost:8082/api/internaute'; // URL backend
+  private apiClientUrl = 'http://localhost:8082/api/client/gestion-compte'; // URL backend pour les clients
 
   constructor(private http: HttpClient) {}
 
   /**
-   * Connexion de l'utilisateur
+   * Méthode pour connecter un utilisateur
    */
   login(payload: any): Observable<any> {
-    return this.http.post(`${this.apiInternauteUrl}/connecter`, payload);
+    return this.http.post(`${this.apiInternauteUrl}/connecter`, {
+      compte: {
+        email: payload.email,
+        password: payload.password
+      },
+      panier: null
+    });
   }
 
   /**
-   * Inscription d'un nouveau client
+   * Méthode pour inscrire un nouveau client
    */
   inscrireClient(payload: any): Observable<any> {
     return this.http.post(`${this.apiInternauteUrl}/inscription-client`, payload);
   }
 
   /**
-   * Récupérer les informations d'un client par ID
+   * Méthode pour récupérer les informations d'un client par ID
    */
   getClient(id: string): Observable<any> {
-    return this.http.get(`${this.apiInternauteUrl}/${id}`);
+    return this.http.get(`${this.apiClientUrl}/${id}`);
   }
+  
 
   /**
-   * Mettre à jour les informations d'un client
+   * Méthode pour mettre à jour les informations d'un client
    */
   updateClient(id: string, payload: any): Observable<any> {
-    return this.http.put(`${this.apiInternauteUrl}/${id}`, payload);
+    return this.http.put(`${this.apiClientUrl}/${id}`, payload);
   }
 }

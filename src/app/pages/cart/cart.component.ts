@@ -18,14 +18,18 @@ export class CartComponent implements OnInit {
 
   // Modifier la quantité d'un produit
   modifierQuantite(produit: Produit): void {
+    console.log('Quantité modifiée pour le produit :', produit); // Log modified product
     if (produit.quantite !== undefined) {
       this.cartService.modifierQuantite(produit.id!, produit.quantite);
+      console.log('État actuel du panier après modification :', this.produitsPanier);
     }
   }
 
-  // Supprimer un produit du panier
   supprimerDuPanier(id: number): void {
+    console.log('Produit supprimé avec l\'ID :', id); // Log removed product
     this.cartService.supprimerDuPanier(id);
-    this.produitsPanier = this.cartService.getCartData(); // Mettre à jour la liste locale
+    this.produitsPanier = this.cartService.getCartData(); // Update local list
+    console.log('État actuel du panier après suppression :', this.produitsPanier);
   }
+
 }

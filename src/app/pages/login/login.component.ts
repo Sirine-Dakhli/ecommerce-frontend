@@ -22,7 +22,7 @@ export class LoginComponent {
     private router: Router,
     private http: HttpClient,
     private userService: UserService,
-    private cartService: CartService 
+    private cartService: CartService
   ) {}
 
   onSubmit(): void {
@@ -56,10 +56,10 @@ export class LoginComponent {
             description: item.description || '',
           }));
 
-          const panierFusionne = this.fusionnerPaniers(panierLocal, panierServeur);
+          //const panierFusionne = this.fusionnerPaniers(panierLocal, panierServeur);
 
           // Mettre à jour le panier
-          this.cartService.setCartData(panierFusionne);
+          this.cartService.setCartData(panierServeur);
         }
 
         // Afficher le succès et rediriger

@@ -9,6 +9,8 @@ export class CartService {
 
   // Récupérer tous les produits dans le panier
   getCartData(): Produit[] {
+    this.produitsPanier = JSON.parse(localStorage.getItem('cart') || '[]');
+    console.log('Panier récupéré depuis localStorage :', this.produitsPanier);
     return this.produitsPanier;
   }
 
@@ -27,16 +29,23 @@ export class CartService {
     console.log('Panier mis à jour:', this.produitsPanier);
   }
 
-
   // Ajouter un produit au panier
   ajouterAuPanier(produit: Produit): void {
+    console.log('Produit cliqué :', produit);
+
     const produitExistant = this.produitsPanier.find((p) => p.id === produit.id);
 
     if (produitExistant) {
       produitExistant.quantite = (produitExistant.quantite || 1) + 1;
+      console.log('Produit déjà existant dans le panier, quantité mise à jour :', produitExistant);
     } else {
       this.produitsPanier.push({ ...produit, quantite: 1 });
+      console.log('Produit ajouté au panier :', produit);
     }
+
+    // Sauvegarder le panier dans localStorage
+    localStorage.setItem('cart', JSON.stringify(this.produitsPanier));
+    console.log('État actuel du panier (sauvegardé) :', this.produitsPanier);
   }
 
   // Modifier la quantité d'un produit
@@ -52,8 +61,16 @@ export class CartService {
     this.produitsPanier = this.produitsPanier.filter((p) => p.id !== id);
   }
 
+  // Vider le panier
+  clearCart(): void {
+    this.produitsPanier = [];
+    console.log('Le panier a été vidé.');
+  }
+
   // Obtenir la quantité totale des produits dans le panier
   getCartQuantity(): number {
     return this.produitsPanier.reduce((total, produit) => total + (produit.quantite || 0), 0);
   }
+
+
 }

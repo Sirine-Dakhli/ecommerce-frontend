@@ -5,9 +5,11 @@ import { GestionCategorieComponent } from './pages/gestion-categorie/gestion-cat
 import { GestionProduitComponent } from './pages/gestion-produit/gestion-produit.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ClientInscriptionComponent } from './pages/inscription-client/client-inscription.component';
-import { ModifierClientComponent } from './pages/modifier-client/modifier-client.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ClientInscriptionComponent } from './pages/inscription-client/client-inscription.component'; 
+import { ModifierClientComponent } from './pages/modifier-client/modifier-client.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/produits', pathMatch: 'full' },
@@ -16,9 +18,10 @@ const routes: Routes = [
   { path: 'admin/gestion-categorie', component: GestionCategorieComponent },
   { path: 'admin/gestion-produit', component: GestionProduitComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'panier', component: CartComponent },
-  { path: 'inscription-client', component: ClientInscriptionComponent },
-  { path: 'modifier-client/:id', component: ModifierClientComponent },
+  { path: 'inscription-client', component: ClientInscriptionComponent } ,
+  { path: 'modifier-client/:id', component: ModifierClientComponent },
 ];
 
 @NgModule({
@@ -26,3 +29,7 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+
+
+

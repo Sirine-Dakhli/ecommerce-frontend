@@ -1,0 +1,56 @@
+<div class="checkout-container">
+  <h2 class="text-center">Confirmation de commande</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+  <form (ngSubmit)="confirmerCommande()">
+    <h4>Informations client</h4>
+    <p><strong>Nom : </strong>{{ user?.nom }} {{ user?.prenom }}</p>
+    <p><strong>Email : </strong>{{ user?.compte?.email }}</p>
+
+    <h4>Informations de paiement</h4>
+    <div class="form-group">
+      <label for="numeroCarte">Numéro de carte</label>
+      <input
+        type="text"
+        id="numeroCarte"
+        class="form-control"
+        [(ngModel)]="numeroCarte"
+        name="commande.numero_carte"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="dateExp">Date d'expiration</label>
+      <input
+        type="date"
+        id="dateExp"
+        class="form-control"
+        [(ngModel)]="dateExp"
+        name="commande.date_exp"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="codeCC">Code de sécurité</label>
+      <input
+        type="text"
+        id="codeCC"
+        class="form-control"
+        [(ngModel)]="codeCC"
+        name="commande.cc"
+        required
+      />
+    </div>
+
+    <h4>Produits dans le panier</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let produit of produitsPanier">
+        {{ produit.nom }} (x{{ produit.quantite }}) - {{ produit.prix }} $
+      </li>
+    </ul>
+
+    <button type="submit" class="btn btn-primary mt-4">Envoyer ma commande</button>
+  </form>
+</div>

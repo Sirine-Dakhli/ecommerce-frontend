@@ -1,49 +1,80 @@
-<div class="container main-content mt-4">
-  <h2 class="text-center mb-4 text-white">Votre Panier</h2>
+<div class="blue-background">
+  <header class="header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <img src="assets/logo.png" alt="ShopSafe Logo" class="logo-img" width="100" height="80"/>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a href="#" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contacter nous</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">fr</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">en</a></li>
+        </ul>
+      </nav>
+      <div class="cart">
+        <a href="#" class="btn btn-light">Panier</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- Si le panier est vide -->
-  <div *ngIf="isEmpty" class="empty-cart">
-    <p>Le panier est vide.</p>
+  <div class="container main-content mt-4">
+    <h2 class="text-center mb-4 text-white">Votre Panier</h2>
+
+    <!-- Si le panier est vide -->
+    <div *ngIf="isEmpty" class="empty-cart text-center text-white">
+      <p>Le panier est vide.</p>
+    </div>
+
+    <!-- Liste des produits dans le panier -->
+    <div class="table-responsive" *ngIf="!isEmpty">
+      <table class="table table-bordered table-striped bg-light">
+        <thead class="table-dark">
+          <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of panier">
+            <td>{{ produit.nom }}</td>
+            <td>{{ produit.prix | currency }}</td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="produit.quantite"
+                min="1"
+                (change)="modifierQuantite(produit, produit.quantite)"
+              />
+            </td>
+            <td>
+              <button
+                (click)="supprimerProduit(produit.id)"
+                class="btn btn-danger"
+              >
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Actions -->
+    <div class="cart-actions text-center mt-4">
+      <button (click)="continuerMagasiner()" class="btn btn-secondary me-2">
+        Continuer à magasiner
+      </button>
+      <button (click)="acheter()" class="btn btn-primary">
+        Acheter
+      </button>
+    </div>
   </div>
 
-  <!-- Liste des produits dans le panier -->
-  <table *ngIf="!isEmpty" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Prix</th>
-        <th>Quantité</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let produit of panier">
-        <td>{{ produit.nom }}</td>
-        <td>{{ produit.prix | currency }}</td>
-        <td>
-          <input
-            type="number"
-            [(ngModel)]="produit.quantite"
-            min="1"
-            (change)="modifierQuantite(produit, produit.quantite)"
-          />
-        </td>
-        <td>
-          <button (click)="supprimerProduit(produit.id)" class="btn btn-danger">
-            Supprimer
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Actions -->
-  <div class="cart-actions mt-4">
-    <button (click)="continuerMagasiner()" class="btn btn-secondary">
-      Continuer à magasiner
-    </button>
-    <button (click)="acheter()" class="btn btn-primary">
-      Acheter
-    </button>
-  </div>
+  <footer class="footer mt-5">
+    <p class="text-white">Accueil – Contacter nous – fr</p>
+  </footer>
 </div>
