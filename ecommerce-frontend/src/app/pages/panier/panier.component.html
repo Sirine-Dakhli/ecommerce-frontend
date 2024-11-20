@@ -1,29 +1,49 @@
-<div class="container">
-  <h1>Panier</h1>
-  <div *ngIf="isLoading">Chargement du panier...</div>
-  <div *ngIf="!isLoading && panierProduits.length === 0">Votre panier est vide.</div>
-  <table *ngIf="!isLoading && panierProduits.length > 0" class="table">
+<div class="container main-content mt-4">
+  <h2 class="text-center mb-4 text-white">Votre Panier</h2>
+
+  <!-- Si le panier est vide -->
+  <div *ngIf="isEmpty" class="empty-cart">
+    <p>Le panier est vide.</p>
+  </div>
+
+  <!-- Liste des produits dans le panier -->
+  <table *ngIf="!isEmpty" class="table table-bordered">
     <thead>
       <tr>
         <th>Produit</th>
         <th>Prix</th>
         <th>Quantité</th>
-        <th>Total</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let produit of panierProduits">
+      <tr *ngFor="let produit of panier">
         <td>{{ produit.nom }}</td>
-        <td>{{ produit.prix | currency: 'EUR' }}</td>
+        <td>{{ produit.prix | currency }}</td>
         <td>
-          <input type="number" [(ngModel)]="produit.quantite" (change)="modifierQuantite(produit.id, produit.quantite)" />
+          <input
+            type="number"
+            [(ngModel)]="produit.quantite"
+            min="1"
+            (change)="modifierQuantite(produit, produit.quantite)"
+          />
         </td>
-        <td>{{ produit.total | currency: 'EUR' }}</td>
         <td>
-          <button (click)="supprimerProduit(produit.id)">Supprimer</button>
+          <button (click)="supprimerProduit(produit.id)" class="btn btn-danger">
+            Supprimer
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Actions -->
+  <div class="cart-actions mt-4">
+    <button (click)="continuerMagasiner()" class="btn btn-secondary">
+      Continuer à magasiner
+    </button>
+    <button (click)="acheter()" class="btn btn-primary">
+      Acheter
+    </button>
+  </div>
 </div>

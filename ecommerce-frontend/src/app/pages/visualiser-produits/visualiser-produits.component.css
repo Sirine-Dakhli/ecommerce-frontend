@@ -1,17 +1,35 @@
+/* Global Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Empêche tout débordement */
+}
 
+/* Page Background */
 .blue-background {
   background-color: #6ba9db;
+  display: flex;
+  flex-direction: column; /* Structure en colonnes */
   min-height: 100vh;
   color: #ffffff;
 }
 
-
+/* Header */
 .header {
   background-color: #508bb7;
-  padding: 10px 20px;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed; /* Fixe le header en haut */
+  top: 0;
+  left: 0;
+ 
+  width: 100%; /* Occupe toute la largeur */
+  
+  z-index: 1000;
 }
 
 .header .logo h2 {
@@ -46,7 +64,7 @@
   font-weight: bold;
 }
 
-
+/* Sidebar Categories */
 .categories {
   background-color: #508bb7;
   padding: 15px;
@@ -74,7 +92,16 @@
   text-decoration: underline;
 }
 
+/* Main Content */
+.main-content {
+  flex: 1; /* Prend l'espace disponible entre le header et le footer */
+  margin-top: 300px; /* Laisse de l’espace pour le header */
+  padding: 100px;
+  overflow-y: auto; /* Active le défilement uniquement sur la zone principale */
+  padding-bottom: 70px; /* Laisse de l’espace pour le footer */
+}
 
+/* Product Grid */
 .produits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -111,7 +138,7 @@
   background-color: #e0a800;
 }
 
-/* Messages */
+/* Loading and Error Messages */
 .loading {
   text-align: center;
   font-size: 18px;
@@ -127,12 +154,12 @@
   margin-top: 20px;
 }
 
-
+/* Footer */
 .footer {
-  position: fixed;
+  position: fixed; /* Fixe le footer en bas */
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100%; /* Occupe toute la largeur */
   background-color: #508bb7;
   color: #ffffff;
   text-align: center;

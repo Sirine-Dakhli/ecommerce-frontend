@@ -1,79 +1,86 @@
 <div class="blue-background">
-  <header class="header">
-    <div class="container d-flex justify-content-between align-items-center">
+  <div class="header">
+    <div class="container d-flex justify-content-between align-items-center py-3">
       <div class="logo">
-        <h2>LOGO</h2>
+        <img src="assets/logo.jpg" alt="ShopSafe Logo" class="logo-img" width="100" height="80"/>
       </div>
       <nav>
         <ul class="nav">
-          <li class="nav-item"><a href="#" class="nav-link">Accueil</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Contacter nous</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">fr</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">en</a></li>
+          <li class="nav-item">
+            <a routerLink="/" class="nav-link text-white">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/contact" class="nav-link text-white">Contact</a>
+          </li>
+          <li class="nav-item text-white">
+            <a *ngIf="!userName; else userLoggedIn" routerLink="/login" class="nav-link text-warning">
+              Se connecter
+            </a>
+            <ng-template #userLoggedIn>
+              Bonjour, <strong>{{ userName }}</strong>
+            </ng-template>
+          </li>
         </ul>
       </nav>
       <div class="cart">
-        <a href="#" class="btn btn-light">Panier</a>
+        <a routerLink="/panier" class="btn btn-light">Panier ({{ quantitePanier }})</a>
       </div>
+
     </div>
-  </header>
+  </div>
 
   <div class="container main-content mt-4">
-    <h2 class="text-center mb-4 text-white">Visualiser les Produits</h2>
-
-    <!-- Barre de recherche -->
-    <div class="search-bar mb-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Rechercher un produit..."
-        [(ngModel)]="searchTerm"
-        (input)="filtrerProduitsLocaux()"
-      />
-    </div>
+    <h2 class="text-center mb-4 text-white">Liste des Produits</h2>
 
     <div class="row">
-      <!-- Catégories -->
-      <div class="categories col-md-3">
-        <h3>Catégories</h3>
-        <ul>
+      <div class="col-md-3">
+        <h5 class="text-white">Catégories</h5>
+        <ul class="list-group">
           <li
+            class="list-group-item"
             *ngFor="let categorie of categories"
             (click)="filtrerParCategorie(categorie.id)"
+            style="cursor: pointer"
           >
             {{ categorie.nom }}
           </li>
-          <li (click)="reinitialiserFiltrage()">Toutes les catégories</li>
+          <li class="list-group-item text-warning" (click)="supprimerFiltre()" style="cursor: pointer">
+            Toutes les catégories
+          </li>
         </ul>
       </div>
 
-      <!-- Produits -->
-      <div class="produits-grid col-md-9">
-        <div *ngFor="let produit of produitsFiltres" class="produit-card">
-          <div class="produit-image">
-            <img src="assets/images/default-product.png" alt="Image Produit" />
+      <div class="col-md-9">
+        <div class="search-bar mb-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Rechercher un produit..."
+            [(ngModel)]="searchTerm"
+            (input)="filtrerProduitsLocaux()"
+          />
+        </div>
+        <div *ngFor="let categorie of getCategorieKeys()">
+          <h4 class="text-white mt-3">{{ categorie }}</h4>
+          <div class="row">
+            <div *ngFor="let produit of produitsFiltresParCategorie[categorie]" class="col-md-4 mb-4">
+              <div class="card">
+                <img width="90" height="150"
+                  src="assets/produit.jpg"
+                  alt="{{ produit.nom }}"
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ produit.nom }}</h5>
+                  <p class="card-text">Prix : {{ produit.prix }} $</p>
+                  <button class="btn btn-primary" (click)="ajouterAuPanier(produit)">Ajouter</button>
+
+                </div>
+              </div>
+            </div>
           </div>
-          <h3>{{ produit.nom }}</h3>
-          <p>{{ produit.description }}</p>
-          <p>Prix : {{ produit.prix }} $</p>
-          <button class="ajouter" (click)="ajouterAuPanier(produit)">
-            Ajouter
-          </button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Gestion des messages -->
-  <div *ngIf="isLoading" class="loading">Chargement des produits...</div>
-  <div *ngIf="!isLoading && produitsFiltres.length === 0" class="no-products">
-    Aucun produit disponible.
-  </div>
-  <div *ngIf="error" class="error">
-    Une erreur est survenue : {{ error }}
-  </div>
-
-  <footer class="footer">
-    <p>Accueil – contacter nous – fr</p>
-  </footer>
 </div>

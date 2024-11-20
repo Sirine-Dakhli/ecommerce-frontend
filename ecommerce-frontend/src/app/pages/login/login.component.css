@@ -1,136 +1,182 @@
 /* Container principal */
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #5ba8e4;
-    color: #fff;
-  }
-  
-  /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: #4a90d9;
-    color: white;
-  }
-  
-  .logo {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-  }
-  
-  .cart {
-    display: flex;
-    align-items: center;
-  }
-  
-  .btn-cart {
-    background-color: #ffc107;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  /* Formulaire */
-  .form-container {
-    flex: 1;
-    max-width: 600px;
-    max-height: 400px;
-    margin: 50px auto;
-    background-color: #dbe9f4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #003f7d;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-label {
-    font-size: 16px;
-    color: #003f7d;
-    margin-bottom: 5px;
-  }
-  
-  .form-control {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #003f7d;
-    border-radius: 5px;
-  }
-  
-  /* Bouton */
-  .btn {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-yellow {
-    background-color: #ffc107;
-    color: #003f7d;
-  }
-  
-  .btn-yellow:disabled {
-    background-color: #e0e0e0;
-    color: #9e9e9e;
-    cursor: not-allowed;
-  }
-  
-  /* Alertes */
-  .alert {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #4a90d9;
-    color: white;
-    font-size: 14px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #5ba8e4;
+  color: #fff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #4a90d9;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  max-height: 80px;
+  width: auto;
+}
+
+/* Menu de navigation stylé */
+.nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  margin: 0 15px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav ul li a:hover {
+  background-color: #ffc107; /* Couleur jaune */
+  color: #003f7d; /* Texte bleu foncé */
+}
+
+.nav ul li a.active {
+  background-color: white;
+  color: #4a90d9;
+}
+
+/* Bouton "Panier" */
+.cart {
+  display: flex;
+  align-items: center;
+}
+
+.btn-cart {
+  background-color: #ffc107; /* Couleur jaune */
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cart:hover {
+  background-color: #e0a800; /* Couleur jaune plus foncée au survol */
+  color: white;
+}
+
+/* Section principale */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Formulaire */
+.form-container {
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  background-color: #dbe9f4;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003f7d;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 16px;
+  color: #003f7d;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #003f7d;
+  border-radius: 5px;
+}
+
+/* Bouton */
+.btn {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-yellow {
+  background-color: #ffc107;
+  color: #003f7d;
+}
+
+.btn-yellow:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+/* Alertes */
+.alert {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #4a90d9;
+  color: white;
+  font-size: 14px;
+  margin-top: auto; /* Force le footer à rester en bas */
+}
