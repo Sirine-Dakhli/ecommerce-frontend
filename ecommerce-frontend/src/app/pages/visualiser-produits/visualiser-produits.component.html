@@ -1,5 +1,4 @@
 <div class="blue-background">
-  <!-- Header -->
   <div class="header">
     <div class="container d-flex justify-content-between align-items-center py-3">
       <div class="logo">
@@ -24,17 +23,16 @@
         </ul>
       </nav>
       <div class="cart">
-        <a class="btn btn-light">Panier ({{ quantitePanier }})</a>
+        <a routerLink="/panier" class="btn btn-light">Panier ({{ quantitePanier }})</a>
       </div>
+
     </div>
   </div>
 
-  <!-- Contenu Principal -->
   <div class="container main-content mt-4">
     <h2 class="text-center mb-4 text-white">Liste des Produits</h2>
 
     <div class="row">
-      <!-- Sidebar pour les catégories -->
       <div class="col-md-3">
         <h5 class="text-white">Catégories</h5>
         <ul class="list-group">
@@ -52,9 +50,7 @@
         </ul>
       </div>
 
-      <!-- Liste des produits par catégorie -->
       <div class="col-md-9">
-        <!-- Barre de recherche -->
         <div class="search-bar mb-4">
           <input
             type="text"
@@ -64,15 +60,10 @@
             (input)="filtrerProduitsLocaux()"
           />
         </div>
-
-        <!-- Produits affichés par catégorie -->
         <div *ngFor="let categorie of getCategorieKeys()">
           <h4 class="text-white mt-3">{{ categorie }}</h4>
           <div class="row">
-            <div
-              *ngFor="let produit of produitsFiltresParCategorie[categorie]"
-              class="col-md-4 mb-4"
-            >
+            <div *ngFor="let produit of produitsFiltresParCategorie[categorie]" class="col-md-4 mb-4">
               <div class="card">
                 <img
                   src="assets/images/default-product.png"
@@ -83,65 +74,13 @@
                   <h5 class="card-title">{{ produit.nom }}</h5>
                   <p class="card-text">Prix : {{ produit.prix }} $</p>
                   <button class="btn btn-primary" (click)="ajouterAuPanier(produit)">Ajouter</button>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Message si aucun produit n'est trouvé -->
-        <div *ngIf="produitsFiltres.length === 0" class="text-center mt-4">
-          <p class="text-warning">Aucun produit trouvé.</p>
-        </div>
       </div>
     </div>
-
-    <!-- Panier -->
-    <div class="panier mt-5">
-      <h3 class="text-white">Mon Panier</h3>
-      <table class="table table-bordered bg-white" *ngIf="produitsPanier.length > 0; else panierVide">
-        <thead>
-          <tr>
-            <th>Produit</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let produit of produitsPanier">
-            <td>{{ produit.nom }}</td>
-            <td>{{ produit.prix }} $</td>
-            <td>
-              <input
-                type="number"
-                [(ngModel)]="produit.quantite"
-                (change)="ajouterAuPanier(produit)"
-                min="1"
-                class="form-control"
-                style="max-width: 80px"
-              />
-            </td>
-            <td>{{ produit.prix * produit.quantite! }} $</td>
-            <td>
-              <button class="btn btn-danger btn-sm" (click)="supprimerDuPanier(produit.id!)">
-                Supprimer
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Message si le panier est vide -->
-      <ng-template #panierVide>
-        <p class="text-warning text-center">Votre panier est vide.</p>
-      </ng-template>
-    </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="footer text-center py-3 mt-4">
-    <p class="text-white">Accueil – Contact – fr</p>
-  </footer>
 </div>
