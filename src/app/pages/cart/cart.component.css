@@ -1,0 +1,40 @@
+/* Ajout des styles réutilisés */
+.blue-background {
+    background-color: #6ba9db;
+    min-height: 100vh;
+    color: #ffffff;
+  }
+  
+  .header, .footer {
+    background-color: #508bb7;
+    color: #ffffff;
+    padding: 10px 20px;
+  }
+  
+  .nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Conteneur principal */
+  .main-content {
+    padding: 20px;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .blue-background {
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  /* Formulaire (déjà inclus dans `cart.component.css`) */
+  

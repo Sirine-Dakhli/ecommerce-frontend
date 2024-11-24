@@ -1,0 +1,34 @@
+.blue-background {
+  background-color: #6ba9db;
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #508bb7;
+  color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.cart-actions {
+  text-align: center;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #ffc107;
+  color: #000;
+}

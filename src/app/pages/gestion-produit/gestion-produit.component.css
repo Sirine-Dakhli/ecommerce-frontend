@@ -1,0 +1,127 @@
+
+.blue-background {
+  background-color: #6ba9db;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+/* Entête du module */
+.header {
+  background-color: #508bb7;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 10px;
+  text-align: center;
+}
+
+
+h2 {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+.product-form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.product-form label {
+  font-weight: bold;
+  color: #333;
+}
+
+.product-form .btn {
+  background-color: #ffc107;
+  border: none;
+  padding: 10px 15px;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.product-form .btn:hover {
+  background-color: #e0a800;
+  color: #000;
+}
+
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #508bb7;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.styled-table td {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+
+.styled-table .actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.styled-table .btn-modifier {
+  background-color: transparent;
+  border: none;
+  color: #0056b3;
+  font-weight: bold;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.styled-table .btn-modifier:hover {
+  color: #003366;
+}
+
+.styled-table .btn-supprimer {
+  background-color: transparent;
+  border: none;
+  color: #b30000;
+  font-weight: bold;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.styled-table .btn-supprimer:hover {
+  color: #800000;
+}
+
+
+.text-center .spinner-border {
+  margin: 20px 0;
+}
+
+.text-muted {
+  font-size: 14px;
+  font-style: italic;
+}
